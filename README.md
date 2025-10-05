@@ -1,3 +1,12 @@
+# Quick Note
+
+I found this quick example [ynsrc/python-simple-rest-api](https://github.com/ynsrc/python-simple-rest-api) of a simple Python API while looking for quick reference to cobble together a quick API for simple a RPI project I am working on (didn't need or want the overhead of FastAPI or equivalent for this simple home project - litterally to set off an animal trap I wanted and API endpoint). I though your little example was spot on for my purposes but there was one thing that I felt could be handled a little bit different and I feel like makes it a little easier extendable and I thought it would be a bit cleaner to remove the ApiRequestHandler definition from inside __main__ and especially with the global api reference.
+
+Basically, all I did was add a method call to the API class that get passed to the HTTPServer instead of the ApiRequestHandler. Internally to the HTTPServer it will "init" the RequestHandlerClass but in this case will just call the API instance. The callable method will then instantiate the ApiRequestHandler passing a reference to the API instance to the ApiRequestHandler without the need for the global in the ApiRequestHandler.
+
+In the ApiRequestHandler all I had to do was initialize the super class passing the same arguments needed for the BaseHTTPRequestHandler while allowing it to pass the api object. Then the API callable returns that ApiRequestHandler object that carries with reference to itself.
+
+
 # Simple REST API with pure Python
 
 This is an example REST API project.
