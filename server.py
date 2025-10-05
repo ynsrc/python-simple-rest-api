@@ -6,8 +6,8 @@ PORT = 5000
 
 class ApiRequestHandler(BaseHTTPRequestHandler):
 
-    def __init__(self, request, client_address, ref_self, api):
-        super().__init__(request, client_address, ref_self)
+    def __init__(self, request, client_address, ref_req, api):
+        super().__init__(request, client_address, ref_req)
         self.api = api
 
     def call_api(self, method, path, args):
