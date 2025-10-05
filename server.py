@@ -148,8 +148,6 @@ def delete(args):
 
 if __name__ == "__main__":
 
-
-
     httpd = HTTPServer(('', PORT), api)
     print(f"Application started at http://127.0.0.1:{PORT}/")
     httpd.serve_forever()
