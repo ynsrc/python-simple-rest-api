@@ -6,9 +6,9 @@ PORT = 5000
 
 class ApiRequestHandler(BaseHTTPRequestHandler):
 
-    def __init__(self, request, client_address, ref_req, api):
+    def __init__(self, request, client_address, ref_req, api_ref):
+        self.api = api_ref
         super().__init__(request, client_address, ref_req)
-        self.api = api
 
     def call_api(self, method, path, args):
         if path in api.routing[method]:
@@ -67,7 +67,7 @@ class API():
         return wrapper
 
     def __call__(self, request, client_address, ref_request):
-        api_handler = ApiRequestHandler(request, client_address, ref_request, api=self)
+        api_handler = ApiRequestHandler(request, client_address, ref_request, api_ref=self)
         return api_handler
 
 
